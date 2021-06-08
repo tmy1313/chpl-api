@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="svap-developers" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c95b4c7b-ca90-462c-ba00-f735df9045bb">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="developerName" class="java.lang.String"/>
+	<field name="acb" class="java.lang.String"/>
+	<field name="listingCount" class="java.lang.Integer"/>
+	<field name="criteriaCount" class="java.lang.Integer"/>
+	<field name="svapCount" class="java.lang.Integer"/>
+	<variable name="LISTINGS_SUM" class="java.lang.Integer" resetType="Group" resetGroup="ACB" calculation="Sum">
+		<variableExpression><![CDATA[$F{listingCount}]]></variableExpression>
+	</variable>
+	<variable name="CRITERIA_SUM" class="java.lang.Integer" resetType="Group" resetGroup="ACB" calculation="Sum">
+		<variableExpression><![CDATA[$F{criteriaCount}]]></variableExpression>
+	</variable>
+	<variable name="SVAP_SUM" class="java.lang.Integer" resetType="Group" resetGroup="ACB" calculation="Sum">
+		<variableExpression><![CDATA[$F{svapCount}]]></variableExpression>
+	</variable>
+	<group name="ACB">
+		<groupExpression><![CDATA[$F{acb}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<textField>
+					<reportElement x="7" y="3" width="122" height="20" uuid="c9ba59d4-bfd1-47a4-8cc1-24c1bd73808d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="22fe92f6-d064-4618-9536-f3cac9da475b"/>
+					</reportElement>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{acb}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="137" y="3" width="100" height="20" uuid="bf2d19e4-5a98-4693-92a4-0a132821a849">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5db9368-81fe-4d3f-9fb0-c3ad63a5aa55"/>
+					</reportElement>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Developer]]></text>
+				</staticText>
+				<line direction="BottomUp">
+					<reportElement x="0" y="21" width="540" height="1" uuid="089baa22-c2d9-4fbb-a14c-6cd42caf6192"/>
+				</line>
+				<staticText>
+					<reportElement x="360" y="3" width="50" height="20" uuid="b1324108-c95f-4c3e-b20c-2704be4333c7">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5db9368-81fe-4d3f-9fb0-c3ad63a5aa55"/>
+					</reportElement>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Listings]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="420" y="3" width="50" height="20" uuid="4d39008f-ffa5-4d1b-b302-bac12aa68c71">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5db9368-81fe-4d3f-9fb0-c3ad63a5aa55"/>
+					</reportElement>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Criteria]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="480" y="3" width="50" height="20" uuid="cce05fe0-90b9-4525-b3b0-909c8631623a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5db9368-81fe-4d3f-9fb0-c3ad63a5aa55"/>
+					</reportElement>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SVAPs]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<staticText>
+					<reportElement x="6" y="9" width="80" height="14" uuid="ebc19f9f-e5e7-4e92-97de-1c9f44e3a531"/>
+					<text><![CDATA[Total Developers:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="89" y="9" width="100" height="14" uuid="14d48dc4-e477-40c4-953f-c331473f6ed9">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$V{ACB_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="361" y="9" width="44" height="14" uuid="63959904-e4cf-408b-8395-637cefeef29c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$V{LISTINGS_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="421" y="9" width="44" height="14" uuid="5f3db455-7f66-4390-afe9-b6f8bc1cf896">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$V{CRITERIA_SUM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="480" y="9" width="44" height="14" uuid="dc351329-a910-4614-b7d3-f55468a0b7ef">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$V{SVAP_SUM}]]></textFieldExpression>
+				</textField>
+				<line direction="BottomUp">
+					<reportElement x="1" y="4" width="540" height="1" uuid="71e74c2e-1471-4c57-b0da-e9f854cf265f"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="250" height="30" forecolor="#0099FF" uuid="e9419a28-02bc-44d9-bce5-eb046cb8f2e9"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Developers by ONC-ACB]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="138" y="0" width="212" height="14" uuid="2b359fbc-c1e7-4001-bd1d-7264ff4b39e8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5db9368-81fe-4d3f-9fb0-c3ad63a5aa55"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{developerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="0" width="44" height="14" uuid="ab1ac068-ab2b-4782-9740-51060991690e"/>
+				<textFieldExpression><![CDATA[$F{listingCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="0" width="44" height="14" uuid="74c927bd-1f2d-45b6-a376-8e0cc0bcd78c"/>
+				<textFieldExpression><![CDATA[$F{criteriaCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="0" width="44" height="14" uuid="d86e8159-4a6a-49d1-bf8b-bfb5a8eac0c7"/>
+				<textFieldExpression><![CDATA[$F{svapCount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

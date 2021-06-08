@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="svap" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="719cbf3a-d82f-4fd1-8b9d-d79e6c30729e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="developersWithStatsDataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="developersWithStatsReport" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="developerName" class="java.lang.String"/>
+	<field name="acb" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="6" width="180" height="33" uuid="5c52b511-1bb6-4926-996a-52c7aeeaf247"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ONC CHPL]]></text>
+			</staticText>
+			<textField pattern="HH:mm">
+				<reportElement x="493" y="42" width="61" height="19" uuid="2d11682d-d9c4-4cd9-9613-a34f574969c0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="253" y="6" width="301" height="34" forecolor="#0033CC" uuid="c975bb75-3ccc-40c6-a7b1-9db5e0b5de02"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SVAP Adoption Reports]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="403" y="42" width="90" height="18" uuid="48743a0d-9e81-43ba-a858-2fb622fbda47"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<subreport>
+				<reportElement x="-3" y="8" width="200" height="23" uuid="b3a97be5-bcc5-485e-9f2a-747e9a112cf6"/>
+				<dataSourceExpression><![CDATA[$P{developersWithStatsDataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{developersWithStatsReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="454" y="0" width="100" height="14" uuid="11a123c4-6b94-4ac6-889f-424e87ee5495">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

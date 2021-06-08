@@ -789,5 +789,22 @@
                 </entry>
             </job-data-map>
         </job>
+        
+        <!-- Generate SVAP Report using Jasper Reports-->
+        <job>
+            <name>SVAP Report</name>
+            <group>systemJobs</group>
+            <description>Generate SVAP Report using Jasper Reports</description>
+            <job-class>gov.healthit.chpl.scheduler.job.SvapReportJob</job-class>
+            <durability>true</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>authorities</key>
+                    <value>ROLE_ADMIN</value>
+                </entry>
+            </job-data-map>
+        </job>
+        
     </schedule>
 </job-scheduling-data>
