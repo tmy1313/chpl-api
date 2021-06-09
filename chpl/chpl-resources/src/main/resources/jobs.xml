@@ -795,7 +795,23 @@
             <name>SVAP Report</name>
             <group>systemJobs</group>
             <description>Generate SVAP Report using Jasper Reports</description>
-            <job-class>gov.healthit.chpl.scheduler.job.SvapReportJob</job-class>
+            <job-class>gov.healthit.chpl.scheduler.job.svapreports.SvapReportsJob</job-class>
+            <durability>true</durability>
+            <recover>false</recover>
+            <job-data-map>
+                <entry>
+                    <key>authorities</key>
+                    <value>ROLE_ADMIN</value>
+                </entry>
+            </job-data-map>
+        </job>
+        
+        <!-- Generate SVAP Reporting Data-->
+        <job>
+            <name>SVAP Report Data Creator</name>
+            <group>systemJobs</group>
+            <description>Generate SVAP Report Date</description>
+            <job-class>gov.healthit.chpl.scheduler.job.svapreports.SvapReportsCreatorJob</job-class>
             <durability>true</durability>
             <recover>false</recover>
             <job-data-map>
