@@ -33,5 +33,4 @@ public class AttestationPeriodDeveloperException {
         this.developer = entity.getDeveloper().toDomain();
         this.exceptionEnd = entity.getExceptionEnd();
     }
-
 }
