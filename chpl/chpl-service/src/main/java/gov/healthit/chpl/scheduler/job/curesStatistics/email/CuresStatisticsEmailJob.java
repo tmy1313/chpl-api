@@ -54,7 +54,7 @@ public class CuresStatisticsEmailJob  extends QuartzJob {
     private void sendEmail(JobExecutionContext context, List<File> attachments) throws EmailNotSentException {
         String emailAddress = context.getMergedJobDataMap().getString(JOB_DATA_KEY_EMAIL);
         LOGGER.info("Sending email to: " + emailAddress);
-        chplEmailFactory.emailBuilder()
+         chplEmailFactory.emailBuilder()
                 .recipient(emailAddress)
                 .subject(env.getProperty("curesStatisticsReport.subject"))
                 .htmlMessage(createHtmlMessage())
@@ -67,6 +67,7 @@ public class CuresStatisticsEmailJob  extends QuartzJob {
         return chplHtmlEmailBuilder.initialize()
                 .heading("Cures Upgrade Statistics")
                 .paragraph("", env.getProperty("curesStatisticsReport.listingCuresStatusStatistics.body"))
+                .paragraph("", "<a href='https://app.powerbi.com/view?r=eyJrIjoiMjUyNTU3MWQtNjE5YS00NGQzLTkzM2YtZDZkZDcyZmJiOGQ1IiwidCI6IjMwN2QyMTJhLWZiODYtNDgwNy04NGRkLTg2Nzc2OWI4MDQyYSIsImMiOjF9'>Cures Update Report from Power BI</a>")
                 .footer(AdminFooter.class)
                 .build();
     }
