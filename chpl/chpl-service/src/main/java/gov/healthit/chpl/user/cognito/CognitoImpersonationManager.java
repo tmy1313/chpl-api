@@ -76,7 +76,7 @@ public class CognitoImpersonationManager {
                 .userPoolId(config.getUserPoolId())
                 .clientId(config.getClientId())
                 .challengeName("CUSTOM_CHALLENGE")
-                .clientMetadata(Map.of("IMPERSONATED_BY", AuthUtil.getCurrentUser().getEmail()))
+                .clientMetadata(Map.of("impersonatedBy", AuthUtil.getCurrentUser().getEmail()))
                 .challengeResponses(Map.of("USERNAME", "at-onc-cognito@test.com",
                         "ANSWER", "IMPERSONATING",  // This key is required Cognito, but not is not used
                         "SECRET_HASH", config.calculateSecretHash(email)))
