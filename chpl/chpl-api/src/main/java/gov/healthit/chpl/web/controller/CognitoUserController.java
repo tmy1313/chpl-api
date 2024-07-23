@@ -10,8 +10,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +32,7 @@ import gov.healthit.chpl.exception.ValidationException;
 import gov.healthit.chpl.manager.auth.CognitoAuthenticationManager;
 import gov.healthit.chpl.user.cognito.CognitoAuthenticationChallengeException;
 import gov.healthit.chpl.user.cognito.CognitoAuthenticationResponse;
+import gov.healthit.chpl.user.cognito.CognitoImpersonationManager;
 import gov.healthit.chpl.user.cognito.CognitoUserInvitation;
 import gov.healthit.chpl.user.cognito.CognitoUserManager;
 import gov.healthit.chpl.util.AuthUtil;
@@ -47,12 +50,13 @@ public class CognitoUserController {
 
     private CognitoUserManager cognitoUserManager;
     private CognitoAuthenticationManager cognitoAuthenticationManager;
+    private CognitoImpersonationManager cognitoImpersonationManager;
     private ErrorMessageUtil errorMessageUtil;
     private FF4j ff4j;
 
     @Autowired
     public CognitoUserController(CognitoUserManager cognitoUserManager, CognitoAuthenticationManager cognitoAuthenticationManager,
-            ErrorMessageUtil errorMessageUtil, FF4j ff4j) {
+            CognitoImpersonationManager cognitoImpersonationManager, ErrorMessageUtil errorMessageUtil, FF4j ff4j) {
         this.cognitoUserManager = cognitoUserManager;
         this.cognitoAuthenticationManager = cognitoAuthenticationManager;
         this.errorMessageUtil = errorMessageUtil;
@@ -180,6 +184,19 @@ public class CognitoUserController {
         } finally {
         SecurityContextHolder.getContext().setAuthentication(null);
         }
+    }
+
+    @Operation(summary = "Impersonate another user.", description = "",
+            security = {
+                    @SecurityRequirement(name = SwaggerSecurityRequirement.API_KEY),
+                    @SecurityRequirement(name = SwaggerSecurityRequirement.BEARER)
+            })
+    @RequestMapping(value = "/impersonate", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public CognitoAuthenticationResponse impersonateUser(
+            @RequestHeader(value = "Authorization", required = true) String userJwt,
+            @RequestParam(value = "user", required = true) String user) throws CognitoAuthenticationChallengeException {
+
+        return cognitoImpersonationManager.impersonate(user);
     }
 
 }
