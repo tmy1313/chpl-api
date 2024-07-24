@@ -3,12 +3,12 @@ package gov.healthit.chpl.user.cognito;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import gov.healthit.chpl.CognitoSecretHash;
 import gov.healthit.chpl.auth.authentication.JWTUserConverterFacade;
-import gov.healthit.chpl.auth.user.JWTAuthenticatedUser;
 import gov.healthit.chpl.domain.auth.User;
 import gov.healthit.chpl.exception.UserRetrievalException;
-import gov.healthit.chpl.util.AuthUtil;
 import lombok.extern.log4j.Log4j2;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminInitiateAuthRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminInitiateAuthResponse;
@@ -19,6 +19,7 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.Authenticat
 import software.amazon.awssdk.services.cognitoidentityprovider.model.ChallengeNameType;
 
 @Log4j2
+@Component
 public class CognitoImpersonationManager {
 
     private CognitoApiConfiguration config;
@@ -59,7 +60,7 @@ public class CognitoImpersonationManager {
                         .accessToken(challengeResult.accessToken())
                         .idToken(challengeResult.idToken())
                         .refreshToken(challengeResult.refreshToken())
-                        .user(getUser(challengeResult.idToken()))
+                        .user(getUser(email))
                         .build();
             }
             return  null;
@@ -76,8 +77,8 @@ public class CognitoImpersonationManager {
                 .userPoolId(config.getUserPoolId())
                 .clientId(config.getClientId())
                 .challengeName("CUSTOM_CHALLENGE")
-                .clientMetadata(Map.of("impersonatedBy", AuthUtil.getCurrentUser().getEmail()))
-                .challengeResponses(Map.of("USERNAME", "at-onc-cognito@test.com",
+                .clientMetadata(Map.of("impersonatedBy", "tmy1313@gmail.com")) //AuthUtil.getCurrentUser().getEmail()))
+                .challengeResponses(Map.of("USERNAME", email,
                         "ANSWER", "IMPERSONATING",  // This key is required Cognito, but not is not used
                         "SECRET_HASH", config.calculateSecretHash(email)))
                 .session(sessionId)
@@ -97,13 +98,7 @@ public class CognitoImpersonationManager {
         }
     }
 
-    private User getUser(String idToken) {
-        JWTAuthenticatedUser jwtUser = jwtUserConverterFacade.getAuthenticatedUser(idToken);
-        try {
-            return cognitoApiWrapper.getUserInfo(jwtUser.getCognitoId());
-        } catch (UserRetrievalException e) {
-            LOGGER.error("Could not decode JWT Token");
-            return null;
-        }
+    private User getUser(String email) throws UserRetrievalException {
+        return cognitoApiWrapper.getUserInfo(email);
     }
 }
