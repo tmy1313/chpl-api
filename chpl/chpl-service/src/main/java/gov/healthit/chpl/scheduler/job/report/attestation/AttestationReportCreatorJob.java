@@ -196,6 +196,8 @@ public class AttestationReportCreatorJob extends QuartzJob {
     }
 
     private Integer getDaysInApprovalPeriod() {
-        return Integer.valueOf(env.getProperty("attestationApprovalWindowInDays"));
+        //TODO: this is just to create test data on DEV
+        //return Integer.valueOf(env.getProperty("attestationApprovalWindowInDays"));
+        return 180;
     }
 }
