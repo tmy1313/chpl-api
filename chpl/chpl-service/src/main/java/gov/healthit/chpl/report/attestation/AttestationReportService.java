@@ -24,7 +24,10 @@ public class AttestationReportService {
 
     @Transactional
     public List<AttestationReport> getAttestationReports() {
-        return attestationReportDAO.getAttestationReportByAttestationPeriod(
-                attestationPeriodService.getMostRecentPastAttestationPeriod());
+        //TODO: this is just to create test data on DEV
+        return attestationReportDAO.getAttestationReportByAttestationPeriod(attestationPeriodService.getMostRecentPastAttestationPeriod());
+
+        //return attestationReportDAO.getAttestationReportByAttestationPeriod(
+        //        attestationPeriodService.getMostRecentPastAttestationPeriod());
     }
 }
